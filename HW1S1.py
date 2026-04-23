@@ -1,4 +1,3 @@
-import numpy as np
 import math
 
 def verify_key(k):
@@ -29,13 +28,15 @@ def NameCipher_encryption(plaintext, key1, key2):
     for char in key1:
         number = ord(char.upper()) - ord('A')
         key1_matrix.append(number)
-    verify_key(key1_matrix)
 
     key2_matrix = []
     for char in key2:
         number = ord(char.upper()) - ord('A')
         key2_matrix.append(number)
-    verify_key(key2_matrix)
+
+    if  not verify_key(key1_matrix) or not verify_key(key2_matrix):
+        return "Encryption failed: One of the keys is invalid"
+
 
     # Convert plaintext to numbers
     text_nums = []
