@@ -59,8 +59,7 @@ def NameCipher_encryption(plaintext, key1, key2):
 
     # Second Encryption Step: Z = (Y * K2 + (a, b)) mod N
     step2_nums = []
-    for i in range(0, len(step1_nums), 2):
-        y1_val = step1_nums[i]
+    for i in range(0, len(step1_nums), 2):        y1_val = step1_nums[i]
         y2_val = step1_nums[i+1]
 
         # Matrix multiplication for K2: Z = (Y * K2 + (a, b))
