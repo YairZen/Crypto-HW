@@ -1,5 +1,6 @@
 import math
 
+
 def verify_key(k):
     # 1. show key
     print(f"Key numbers: {k}")
@@ -46,10 +47,18 @@ def get_inverse_matrix(k):
 
     return inv
 
-def NameCipher_decryption(ciphertext, key1, key2):
+def NameCipher_decryption(ciphertext, key1, key2, is_padded):
     # Student names: Yair, Matan, Y = 24, M = 12
     a = 24
     b = 12
+
+    # Show Input
+    print(f"--- Decryption Input ---")
+    print(f"Ciphertext: {ciphertext}")
+    print(f"Key 1: {key1}, Key 2: {key2}")
+    print(f"Is Padded Flag: {is_padded}")
+    print(f"Parameters: a={a}, b={b}\n")
+
 
     # Convert strings keys to matrix
     key1_matrix = []
@@ -90,7 +99,7 @@ def NameCipher_decryption(ciphertext, key1, key2):
         y2 = (val1 * k2_inv[1] + val2 * k2_inv[3]) % 26
         step1_nums.extend([y1, y2])
 
-    print(f"First decryption step: {step1_nums}\n")
+    print(f"First decryption step: {step1_nums}")
 
     # Second Decryption Step: Reverse Key 1
     step2_nums = []
@@ -107,16 +116,19 @@ def NameCipher_decryption(ciphertext, key1, key2):
         x2 = (val1 * k1_inv[1] + val2 * k1_inv[3]) % 26
         step2_nums.extend([x1, x2])
 
-    print(f"Second decryption step: {step2_nums}\n")
+    print(f"Second decryption step: {step2_nums}")
 
     # Convert numbers back to plaintext string
     plaintext = ""
     for num in step2_nums:
         plaintext += chr(num + ord('A'))
 
+    if is_padded:
+        plaintext = plaintext[:-1]
+
     return plaintext
 
 # Run example
-print("Plaintext for EQQB:", NameCipher_decryption("EQQB", "road", "door"))
+print("Plaintext for EQQB:", NameCipher_decryption("EQQB", "road", "door", False))
 print("\n")
-print("Plaintext for EYRC:", NameCipher_decryption("EYRC", "road", "door"))
+print("Plaintext for EYRCVJ:", NameCipher_decryption("EYRCVJ", "road", "door", True))

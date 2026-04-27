@@ -23,6 +23,18 @@ def NameCipher_encryption(plaintext, key1, key2):
     a = 24
     b = 12
 
+    # 1. Show Input
+    print(f"--- Encryption Input ---")
+    print(f"Plaintext: {plaintext}")
+    print(f"Key 1: {key1}, Key 2: {key2}")
+    print(f"Parameters: a={a}, b={b}\n")
+
+    # Handle odd length with Padding by adding 'X' and Flag
+    is_padded = False
+    if len(plaintext) % 2 != 0:
+        plaintext += "X"
+        is_padded = True
+
     # Convert strings keys to matrix and validate
     key1_matrix = []
     for char in key1:
@@ -76,11 +88,10 @@ def NameCipher_encryption(plaintext, key1, key2):
     for num in step2_nums:
         ciphertext += chr(num + ord('A'))
 
-    return ciphertext
+    return ciphertext, is_padded
 
-
-
-# Run example
-print("Ciphertext for YAIR:", NameCipher_encryption("YAIR", "road", "door"))
+cipher_yair, padded_yair = NameCipher_encryption("YAIR", "road", "door")
+print(f"Ciphertext for YAIR: {cipher_yair}")
 print("\n")
-print("Ciphertext for MATN:", NameCipher_encryption("MATA", "road", "door"))
+cipher_matan, padded_matan = NameCipher_encryption("MATAN", "road", "door")
+print(f"Ciphertext for MATAN: {cipher_matan}")
